@@ -2,7 +2,7 @@ FROM python:3.6.1-alpine
 
 RUN mkdir /code
 WORKDIR /code
-ENV FLASK_APP=pwgen.py
+ENV FLASK_APP=app.py
 EXPOSE 5000
 
 ADD requirements.txt /code/
