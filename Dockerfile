@@ -7,7 +7,6 @@ EXPOSE 5000
 
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
-ADD pwgen.py /code/
-ADD templates/ /code/
+ADD . /code/
 
-CMD ["flask" "run"]
+CMD ["flask", "run"]
