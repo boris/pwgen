@@ -12,11 +12,11 @@ def hello_world():
 
 @app.route('/<int:length>')
 def default_usage(length):
-    return pwgen(length) + "\n"
+    return pwgen(length, symbols=True) + "\n"
 
 @app.route('/<int:length>/<int:count>')
 def generate_random(length, count):
-    passwds.append(pwgen(length, count))
+    passwds.append(pwgen(length, count, symbols=True))
     return passwds
 
 
