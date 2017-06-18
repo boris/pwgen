@@ -13,4 +13,4 @@ def generate_random(length, count):
     return "\n".join(pwgen(length, count)) + "\n"
 
 if __name__ == "__main__":
-    application.run(host='0.0.0.0')
+    app.run(host='0.0.0.0')
