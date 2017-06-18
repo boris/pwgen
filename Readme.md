@@ -9,12 +9,13 @@
 So this thing basically receives two parameters: length and count. A few
 examples:
 
-boris@ubuntu1604 ~                      
+```
 ➜ curl pwgen.zsh.io/40                  
 oWVh743gZZkIgYL5NKxwJL$DHCT8T74Z9CNBuZRv
 ➜ curl pwgen.zsh.io/25/2                
 CHraelyUiGyAhNC)yyoOxFnv9               
 KfHg5Z8%JD5oJHw68BdB3sCD4   
+```
 
 ## Real life example (a.k.a. live-demo):
 
