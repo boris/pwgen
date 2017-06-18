@@ -4,8 +4,6 @@ from flask import render_template
 
 app = Flask(__name__)
 
-passwds = []
-
 @app.route('/')
 def hello_world():
     return render_template('index.html')
@@ -16,8 +14,10 @@ def default_usage(length):
 
 @app.route('/<int:length>/<int:count>')
 def generate_random(length, count):
-    passwds.append(pwgen(length, count, symbols=True))
-    return passwds
+    if count == 1:
+        return pwgen(length, symbols=True) + "\n"
+    else:
+        return "\n".join(pwgen(length, count, symbols=True)) + "\n"
 
 
 if __name__ == "__main__":
