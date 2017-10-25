@@ -10,14 +10,14 @@ def hello_world():
 
 @app.route('/<int:length>')
 def default_usage(length):
-    return pwgen(length, symbols=True) + "\n"
+    return pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
 
 @app.route('/<int:length>/<int:count>')
 def generate_random(length, count):
     if count == 1:
-        return pwgen(length, symbols=True) + "\n"
+        return pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
     else:
-        return "\n".join(pwgen(length, count, symbols=True)) + "\n"
+        return "\n".join(pwgen(length, count, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|")) + "\n"
 
 
 if __name__ == "__main__":
