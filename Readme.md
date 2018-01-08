@@ -1,3 +1,5 @@
+*update: not it works over SSL thanks to [Let's Encrypt](https://letsencrypt.org/)*
+
 # Password Generator
 
 *Motivation*: A quick way to create random password without installing anything!
