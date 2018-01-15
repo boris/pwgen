@@ -1,4 +1,4 @@
-*update: not it works over SSL thanks to [Let's Encrypt](https://letsencrypt.org/)*
+*update: now it works over SSL thanks to [Let's Encrypt](https://letsencrypt.org/)*
 
 # Password Generator
 
