@@ -19,6 +19,16 @@ def generate_random(length, count):
     else:
         return "\n".join(pwgen(length, count, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|")) + "\n"
 
+@app.route('/vault')
+def generate_id():
+    a = pwgen(8, symbols=False)
+    b = pwgen(4, symbols=False)
+    c = pwgen(4, symbols=False)
+    d = pwgen(4, symbols=False)
+    e = pwgen(12, symbols=False)
+
+    return a.lower + "-" + b + "-" + c + "-" + d + "-" + e + "\n"
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
