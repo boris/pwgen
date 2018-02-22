@@ -21,13 +21,13 @@ def generate_random(length, count):
 
 @app.route('/vault')
 def generate_id():
-    a = pwgen(8, symbols=False)
-    b = pwgen(4, symbols=False)
-    c = pwgen(4, symbols=False)
-    d = pwgen(4, symbols=False)
-    e = pwgen(12, symbols=False)
+    a = pwgen(8, symbols=False, no_capitalize=True)
+    b = pwgen(4, symbols=False, no_capitalize=True)
+    c = pwgen(4, symbols=False, no_capitalize=True)
+    d = pwgen(4, symbols=False, no_capitalize=True)
+    e = pwgen(12, symbols=False, no_capitalize=True)
 
-    return a.lower + "-" + b + "-" + c + "-" + d + "-" + e + "\n"
+    return a + "-" + b + "-" + c + "-" + d + "-" + e + "\n"
 
 
 if __name__ == "__main__":
