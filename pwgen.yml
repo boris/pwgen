@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pwgen-deployment
+  labels:
+    app: pwgen
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pwgen
+  template:
+    metadata:
+      labels:
+        app: pwgen
+    spec:
+      containers:
+        - name: pwgen
+          image: boris/pwgen-web:latest
+          ports:
+          - containerPort: 5000
