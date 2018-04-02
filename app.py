@@ -35,7 +35,8 @@ def generate_id():
     d = pwgen(4, symbols=False, no_capitalize=True)
     e = pwgen(12, symbols=False, no_capitalize=True)
 
-    return a + "-" + b + "-" + c + "-" + d + "-" + e + "\n"
+    token =  a + "-" + b + "-" + c + "-" + d + "-" + e + "\n"
+    return Response(token, mimetype="text/plain")
 
 
 if __name__ == "__main__":
