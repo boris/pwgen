@@ -15,7 +15,7 @@ def healthz():
 
 @app.route('/<int:length>')
 def default_usage(length):
-    return pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
+    return Response(pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|"), mimetype="text/plain")
 
 @app.route('/<int:length>/<int:count>')
 def generate_random(length, count):
