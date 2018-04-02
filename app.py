@@ -15,14 +15,17 @@ def healthz():
 
 @app.route('/<int:length>')
 def default_usage(length):
-    return Response(pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|"), mimetype="text/plain")
+    passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
+    return Response(passwd, mimetype="text/plain")
 
 @app.route('/<int:length>/<int:count>')
 def generate_random(length, count):
     if count == 1:
-        return pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
+        passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
+        return Response(passwd, mimetype="text/plain")
     else:
-        return "\n".join(pwgen(length, count, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|")) + "\n"
+        passwd = "\n".join(pwgen(length, count, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|")) + "\n"
+        return Response(passwd, mimetype="text/plain")
 
 @app.route('/vault')
 def generate_id():
