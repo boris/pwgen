@@ -28,3 +28,11 @@ following examples above.
 ## Dockerize all the things!
 `docker run -d boris/pwgen-web` available on [Docker
 Hub](https://hub.docker.com/r/boris/pwgen-web/)
+
+## Running locally
+```
+git clone https://github.com/boris/pwgen.git
+cd pwgen
+pip install -r requirements.txt
+python manage.py runserver
+```
