@@ -38,6 +38,9 @@ def generate_id():
     token =  a + "-" + b + "-" + c + "-" + d + "-" + e + "\n"
     return Response(token, mimetype="text/plain")
 
+@app.route('/donate')
+def sutmm():
+    return render_template('donate.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
