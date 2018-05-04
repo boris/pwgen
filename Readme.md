@@ -36,3 +36,13 @@ cd pwgen
 pip install -r requirements.txt
 python manage.py runserver
 ```
+
+## Running in production
+What you see at [pwgen.zsh.io](https://pwgen.zsh.io) is currently running in
+kubernetes using the deployment described at
+[pwgen-deployment.yaml](pwgen-deployment.yaml).
+
+The way to run it is:
+```
+kubectl create -f https://raw.githubusercontent.com/boris/pwgen/master/pwgen-deployment.yaml
+```
