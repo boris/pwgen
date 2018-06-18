@@ -2,7 +2,7 @@ FROM python:3.6.1-alpine
 
 RUN mkdir /code
 WORKDIR /code
-EXPOSE 443
+EXPOSE 5000
 
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
