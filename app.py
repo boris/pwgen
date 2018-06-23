@@ -1,9 +1,12 @@
 from pwgen import pwgen
+import string
+from random import *
 from flask import Flask
 from flask import render_template
 from flask import Response
 
 app = Flask(__name__)
+allchar = string.ascii_letters + string.punctuation + string.digits
 
 @app.route('/')
 def hello_world():
@@ -15,7 +18,7 @@ def healthz():
 
 @app.route('/<int:length>')
 def default_usage(length):
-    passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
+    passwd = "".join(choice(allchar) for x in range(length))
     return Response(passwd, mimetype="text/plain")
 
 @app.route('/<int:length>/<int:count>')
