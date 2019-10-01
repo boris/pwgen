@@ -5,7 +5,7 @@ metadata:
     app: pwgen
   name: pwgen
   annotations:
-    kubernetes.io/change-cause: "Upgrade to 1.5"
+    kubernetes.io/change-cause: "Upgrade to 1.7"
 spec:
   replicas: 1
   selector:
@@ -20,11 +20,11 @@ spec:
     metadata:
       labels:
         app: pwgen
-        version: "1.4"
+        version: "1.7"
         type: web
     spec:
       containers:
-      - image: boris/pwgen-web:1.5
+      - image: boris/pwgen-web:1.7
         imagePullPolicy: IfNotPresent
         name: pwgen
         resources: {}
