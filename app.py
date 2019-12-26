@@ -15,7 +15,7 @@ def healthz():
 
 @app.route('/<int:length>')
 def default_usage(length):
-    passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
+    passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]|") + "\n"
     return Response(passwd, mimetype="text/plain")
 
 @app.route('/<int:length>/<int:count>')
@@ -43,4 +43,4 @@ def sutmm():
     return render_template('donate.html')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=443)
+    app.run(host='0.0.0.0', port=4443)
