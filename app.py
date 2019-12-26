@@ -21,7 +21,7 @@ def default_usage(length):
 @app.route('/<int:length>/<int:count>')
 def generate_random(length, count):
     if count == 1:
-        passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
+        passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]|") + "\n"
         return Response(passwd, mimetype="text/plain")
     else:
         passwd = "\n".join(pwgen(length, count, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|")) + "\n"
