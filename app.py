@@ -43,4 +43,4 @@ def sutmm():
     return render_template('donate.html')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=443)
+    app.run(threaded=True, port=5000)
