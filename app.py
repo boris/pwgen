@@ -27,20 +27,9 @@ def generate_random(length, count):
         passwd = "\n".join(pwgen(length, count, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|")) + "\n"
         return Response(passwd, mimetype="text/plain")
 
-@app.route('/vault')
-def generate_id():
-    a = pwgen(8, symbols=False, no_capitalize=True)
-    b = pwgen(4, symbols=False, no_capitalize=True)
-    c = pwgen(4, symbols=False, no_capitalize=True)
-    d = pwgen(4, symbols=False, no_capitalize=True)
-    e = pwgen(12, symbols=False, no_capitalize=True)
-
-    token =  a + "-" + b + "-" + c + "-" + d + "-" + e + "\n"
-    return Response(token, mimetype="text/plain")
-
 @app.route('/donate')
 def sutmm():
     return render_template('donate.html')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=443)
+    app.run()
