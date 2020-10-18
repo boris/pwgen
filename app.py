@@ -27,6 +27,23 @@ def default_usage(length):
     single_count.inc()
     return Response(passwd, mimetype="text/plain")
 
+@app.route('/str/<int:length>')
+def generate_one_string(length):
+    passwd = pwgen(length, no_numerals=True, symbols=False) + "\n"
+    single_count.inc()
+    return Response(passwd.upper(), mimetype="text/plain")
+
+@app.route('/str/<int:length>/<int:count>')
+def generate_string(length, count):
+    if count == 1:
+        passwd = pwgen(length, no_numerals=True, symbols=False) + "\n"
+        single_count.inc()
+        return Response(passwd.upper(), mimetype="text/plain")
+    else:
+        passwd = "\n".join(pwgen(length, count, no_numerals=True, symbols=False)) + "\n"
+        multi_count.inc()
+        return Response(passwd.upper(), mimetype="text/plain")
+
 @app.route('/<int:length>/<int:count>')
 def generate_random(length, count):
     if count == 1:
