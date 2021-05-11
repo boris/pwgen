@@ -11,7 +11,7 @@ version 2:
         - setup_remote_docker:
           version: 20.10.2
         - run: |
-          TAG=$CIRCLE_BUILD_NUM
-          docker build -t boris/pwgen-web:$TAG .
-          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-          docker push boris/pwgen-web:$TAG
+            TAG=$CIRCLE_BUILD_NUM
+            docker build -t boris/pwgen-web:$TAG .
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker push boris/pwgen-web:$TAG
