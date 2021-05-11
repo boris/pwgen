@@ -5,9 +5,10 @@ workflows:
   build-and-publish-docker-image:
     jobs:
       - docker/publish:
-          after_checkout:
-            - run: 
-              command: |
-                export TAG=$(git rev-parse --short HEAD)
           image: boris/pwgen-web
           update-description: false
+    steps:
+      - run:
+        name: Set current rev
+        command: |
+          export TAG=$(git rev-parse --short HEAD)
