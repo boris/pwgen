@@ -13,4 +13,4 @@ jobs:
       - run:
           command: |
             export TAG=$(git rev-parse --short HEAD)
-            docker build -t boris/pwgen-web:$TAG .
+            docker build -t boris/pwgen-web:$CIRCLE_BRANCH-$TAG .
