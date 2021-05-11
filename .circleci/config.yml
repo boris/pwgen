@@ -6,7 +6,8 @@ workflows:
     jobs:
       - docker/publish:
           after_checkout:
-            - run: export TAG=$(git rev-parse --short HEAD)
+            - run: 
+              command: |
+                export TAG=$(git rev-parse --short HEAD)
           image: boris/pwgen-web
-          tag: $TAG
           update-description: false
