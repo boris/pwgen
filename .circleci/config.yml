@@ -2,15 +2,16 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.8.1
-        auth:
-          username: boris
-          password: $DOCKERHUB_PASSWORD
+      - image: circleci/python
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.2
-      - run:
-          command: |
-            export TAG=$(git rev-parse --short HEAD)
-            docker build -t boris/pwgen-web:$TAG .
+          version: 19.03.13
+          docker_layer_chaching: true
+      - run: |
+          TAG=$(git rev-parse --short HEAD)
+          docker build -t boris/pwgen-web:id_$TAG .
+          echo "$DOCKER_PASSWORD" \
+              | docker login -u "$DOCKER_LOGIN" \
+                --password-stdin docker.io
+          docker push boris/pwgen-web:id_$TAG
