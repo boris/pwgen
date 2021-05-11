@@ -6,10 +6,11 @@ jobs:
         auth:
           username: boris
           password: $DOCKERHUB_PASSWORD
+    environment:
+      TAG: git rev-parse --short HEAD
     steps:
       - checkout
       - setup_remote_docker:
           version: 20.10.2
       - run: |
-          TAG=$CIRCLE_BUILD_NUM
           docker build -t boris/pwgen-web:$TAG .
