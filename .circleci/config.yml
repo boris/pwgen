@@ -10,8 +10,8 @@ jobs:
           docker_layer_chaching: true
       - run: |
           TAG=$(git rev-parse --short HEAD)
-          docker build -t boris/pwgen-web:$TAG .
+          docker build -t boris/pwgen-web:id_$TAG .
           echo "$DOCKER_PASSWORD" \
               | docker login -u "$DOCKER_LOGIN" \
                 --password-stdin docker.io
-          docker push boris/pwgen-web:$TAG
+          docker push boris/pwgen-web:id_$TAG
