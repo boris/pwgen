@@ -13,5 +13,3 @@ jobs:
       - run: |
           TAG=$CIRCLE_BUILD_NUM
           docker build -t boris/pwgen-web:$TAG .
-          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-          docker push boris/pwgen-web:$TAG
