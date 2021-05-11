@@ -7,5 +7,5 @@ workflows:
       - docker/publish:
           after_checkout:
             - run: export TAG=$(git rev-parse --short HEAD)
-          image: boris/pwgen-web:id_$TAG
+          image: boris/pwgen-web
           update-description: false
