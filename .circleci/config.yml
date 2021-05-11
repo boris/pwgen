@@ -8,7 +8,6 @@ version 2:
             password: $DOCKERHUB_PASSWORD
       steps:
         - checkout
-        - run: docker build -t 
         - setup_remote_docker:
           version: 20.10.2
         - run: |
