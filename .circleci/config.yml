@@ -1,17 +1,15 @@
-orbs:
-  docker: circleci/docker@1.5.0
-version: 2.1
+version: 2
 jobs:
   build:
     steps:
-      - run:
-        name: Set current rev
-        command: |
-          export TAG=$(git rev-parse --short HEAD)
-
-workflows:
-  build-and-publish-docker-image:
-    jobs:
-      - docker/publish:
-          image: boris/pwgen-web
-          update-description: false
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_chaching: true
+      - run: |
+          TAG=$(git rev-parse --short HEAD)
+          docker build -t boris/pwgen-web:$TAG .
+          echo "$DOCKER_PASSWORD" \
+              | docker login -u "$DOCKER_LOGIN" \
+                --password-stdin docker.io
+          docker push boris/pwgen-web:$TAG
