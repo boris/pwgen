@@ -12,4 +12,5 @@ jobs:
           version: 20.10.2
       - run:
           command: |
-            docker build -t boris/pwgen-web:$CIRCLE_SHA1 .
+            export $TAG=$(git rev-parse --short HEAD)
+            docker build -t boris/pwgen-web:$TAG .
