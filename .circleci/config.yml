@@ -1,6 +1,11 @@
 version: 2
 jobs:
   build:
+    filters:
+      branches:
+        only:
+          - main
+
     docker:
       - image: circleci/python
     steps:
