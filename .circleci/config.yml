@@ -2,12 +2,10 @@ orbs:
   docker: circleci/docker@1.5.0
 version: 2.1
 workflows:
-  build-docker-image-only:
+  build-and-publish-docker-image:
     jobs:
       - docker/publish:
           after_checkout:
-            - run: 
-              command: |
-                export TAG=$(git rev-parse --short HEAD)
+            - run: export TAG=$(git rev-parse --short HEAD)
           image: boris/pwgen-web:id_$TAG
           update-description: false
