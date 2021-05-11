@@ -10,4 +10,4 @@ workflows:
               command: |
                 export TAG=$(git rev-parse --short HEAD)
           image: boris/pwgen-web:id_$TAG
-          update_description: false
+          update-description: false
