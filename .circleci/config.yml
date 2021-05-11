@@ -1,16 +1,13 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/python:3.8.1
-        auth:
-          username: boris
-          password: $DOCKERHUB_PASSWORD
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: 20.10.2
-      - run:
-          command: |
-            export TAG=$(git rev-parse --short HEAD)
-            docker build -t boris/pwgen-web:id_$TAG .
+orbs:
+  docker: circleci/docker@1.5.0
+version: 2.1
+workflows:
+  build-docker-image-only:
+    jobs:
+      - docker/publish:
+          after_checkout:
+            - run: 
+              command: |
+                export TAG=$(git rev-parse --short HEAD)
+          image: boris/pwgen-web:id_$TAG
+          update_description: false
