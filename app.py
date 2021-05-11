@@ -4,6 +4,7 @@ from flask import render_template
 from flask import Response
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from prometheus_client import make_wsgi_app, Counter, Gauge
+import subprocess
 
 app = Flask(__name__)
 app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
@@ -15,13 +16,15 @@ multi_count = Counter('multi_requests', 'Requests of multiple passwds')
 str_single_count = Counter('str_single', 'Requests of string-only single passwd')
 str_multi_count = Counter('str_multi', 'Requests of string-only multi passwd')
 
+short_hash = str(subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']),'utf-8').strip()
+
 @app.route('/')
 def hello_world():
-    return render_template('index.html')
+    return render_template('index.html',short_hash=short_hash)
 
 @app.route('/healthz')
 def healthz():
-    return Response("OK", status=200)
+    return Response(f"Current version: {short_hash}", status=200)
 
 @app.route('/<int:length>')
 def default_usage(length):
