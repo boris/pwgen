@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    environment:
+      IMAGE_NAME: boris/pwgen-web
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+        name: Build docker image
+        command: docker build -t $IMAGE_NAME:cicd .
+workflows:
+  version: 2
+  build-master:
+    jobs:
+      - build:
+        filters:
+          branches:
+            only: circle
