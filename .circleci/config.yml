@@ -9,7 +9,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-        version: 20.10.2
+          version: 20.10.2
       - run: |
           TAG=$CIRCLE_BUILD_NUM
           docker build -t boris/pwgen-web:$TAG .
