@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/docker:3.8.1
+      - image: circleci/python:3.8.1
         auth:
           username: boris
           password: $DOCKERHUB_PASSWORD
