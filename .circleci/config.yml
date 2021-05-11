@@ -8,5 +8,5 @@ workflows:
           after_checkout:
             - run: export TAG=$(git rev-parse --short HEAD)
           image: boris/pwgen-web
-          tag: 3b78587
+          tag: $TAG
           update-description: false
