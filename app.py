@@ -24,7 +24,7 @@ def hello_world():
 
 @app.route('/healthz')
 def healthz():
-    return Response(f"Current version: {short_hash}", status=200)
+    return Response(f"Current version: {short_hash}.", status=200)
 
 @app.route('/<int:length>')
 def default_usage(length):
