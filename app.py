@@ -5,6 +5,14 @@ from flask import Response
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from prometheus_client import make_wsgi_app, Counter, Gauge
 import subprocess
+import beeline
+from beeline.middleware.flask import HoneyMiddleware
+
+beeline.init(
+        writekey='iAPI_KEY',
+        dataset='poc-pwgen',
+        service_name='pwgen',
+        )
 
 app = Flask(__name__)
 app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
@@ -18,19 +26,24 @@ str_multi_count = Counter('str_multi', 'Requests of string-only multi passwd')
 
 short_hash = str(subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']),'utf-8').strip()
 
+HoneyMiddleware(app, db_events=False)
+
 @app.route('/')
 def hello_world():
-    return render_template('index.html',short_hash=short_hash)
+    with beeline.tracer("home"):
+        return render_template('index.html',short_hash=short_hash)
 
 @app.route('/healthz')
 def healthz():
-    return Response(f"Current version: {short_hash}.", status=200)
+    with beeline.tracer("healthz"):
+        return Response(f"Current version: {short_hash}.", status=200)
 
 @app.route('/<int:length>')
 def default_usage(length):
-    passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
-    single_count.inc()
-    return Response(passwd, mimetype="text/plain")
+    with beeline.tracer("single int"):
+        passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
+        single_count.inc()
+        return Response(passwd, mimetype="text/plain")
 
 @app.route('/str/<int:length>')
 def generate_one_string(length):
