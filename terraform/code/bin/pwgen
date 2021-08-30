@@ -1,0 +1,12 @@
+#!/home/boris/.pyenv/versions/3.8.1/envs/aws/bin/python3.8
+# EASY-INSTALL-ENTRY-SCRIPT: 'pwgen==0.8.2.post0','console_scripts','pwgen'
+__requires__ = 'pwgen==0.8.2.post0'
+import re
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(
+        load_entry_point('pwgen==0.8.2.post0', 'console_scripts', 'pwgen')()
+    )

@@ -1,0 +1,15 @@
+Metadata-Version: 1.1
+Name: pwgen
+Version: 0.8.2.post0
+Summary: Pure python version of pwgen
+Home-page: https://github.com/vinces1979/pwgen
+Author: Vince Spicer, Pavel Vavilin, Luar Roji
+Author-email: vinces1979@gmail.com, shtartora@gmail.com, cyberplant@gmail.com
+License: MIT
+Description: Simple version of pwgen to generate random password or strings
+Keywords: pwgen,password,strings,random
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
