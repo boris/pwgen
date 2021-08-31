@@ -41,3 +41,11 @@ resource "aws_lambda_permission" "api_gw" {
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.pwgen.execution_arn}/*/*"
 }
+
+resource "aws_lambda_permission" "api_rest" {
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.pwgen_py.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.pwgen_rest.execution_arn}/*/*"
+}
