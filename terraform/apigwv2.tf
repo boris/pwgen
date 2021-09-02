@@ -33,16 +33,3 @@ resource "aws_apigatewayv2_route" "pwgen" {
   route_key = "GET /pass"
   target    = "integrations/${aws_apigatewayv2_integration.pwgen.id}"
 }
-
-resource "aws_apigatewayv2_integration" "foo" {
-  api_id             = aws_apigatewayv2_api.pwgen.id
-  integration_uri    = "arn:aws:lambda:us-east-1:111285186890:function:bitcoin-price"
-  integration_type   = "AWS_PROXY"
-  integration_method = "POST"
-}
-
-resource "aws_apigatewayv2_route" "foo" {
-  api_id    = aws_apigatewayv2_api.pwgen.id
-  route_key = "GET /btc"
-  target    = "integrations/${aws_apigatewayv2_integration.foo.id}"
-}
