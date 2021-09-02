@@ -2,14 +2,15 @@ from pwgen import pwgen
 import json
 
 def lambda_handler(event, context):
-    passwd = pwgen(24,
+    passwd = pwgen(event['length'],
             symbols=True,
             )
     return {
             'statusCode': 200,
             'headers': { 'Content-Type': 'application/json'  },
             'body': json.dumps({
-                'value': passwd
+                'value': passwd,
+                'path': $event,
                 })
             }
 
