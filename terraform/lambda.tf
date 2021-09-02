@@ -1,7 +1,7 @@
 data "archive_file" "lambda_pwgen" {
   type        = "zip"
-  source_dir  = "${path.module}/code"
-  output_path = "${path.module}/releases/pwgen.zip"
+  source_dir  = "${path.module}/code/rand_24"
+  output_path = "${path.module}/code/releases/pwgen_rand_24.zip"
 }
 
 resource "random_pet" "s3_pwgen_name" {
