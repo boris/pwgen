@@ -21,6 +21,7 @@ resource "aws_apigatewayv2_stage" "pwgen" {
   }
 }
 
+# Random route
 resource "aws_apigatewayv2_integration" "pwgen" {
   api_id             = aws_apigatewayv2_api.pwgen.id
   integration_uri    = aws_lambda_function.pwgen_py.invoke_arn
@@ -32,4 +33,18 @@ resource "aws_apigatewayv2_route" "pwgen" {
   api_id    = aws_apigatewayv2_api.pwgen.id
   route_key = "GET /pass"
   target    = "integrations/${aws_apigatewayv2_integration.pwgen.id}"
+}
+
+# Hello world route
+resource "aws_apigatewayv2_integration" "hello" {
+  api_id             = aws_apigatewayv2_api.pwgen.id
+  integration_uri    = aws_lambda_function.pwgen_hello.invoke_arn
+  integration_type   = "AWS_PROXY"
+  integration_method = "POST"
+}
+
+resource "aws_apigatewayv2_route" "hello" {
+  api_id    = aws_apigatewayv2_api.pwgen.id
+  route_key = "GET /status"
+  target    = "integrations/${aws_apigatewayv2_integration.hello.id}"
 }
