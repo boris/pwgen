@@ -10,7 +10,15 @@ def lambda_handler(event, context):
             'headers': { 'Content-Type': 'application/json'  },
             'body': json.dumps({
                 'value': passwd,
-                'path': $event,
+                'path': event,
                 })
             }
 
+def hello_world(event, context):
+    return {
+            'statusCode': 200,
+            'headers': { 'Content-Type': 'application/json'},
+            'body': json.dumps({
+               'message' : 'hello world!'
+               })
+            }
