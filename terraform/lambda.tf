@@ -34,10 +34,30 @@ resource "aws_lambda_function" "pwgen_py" {
   role = aws_iam_role.lambda_exec.arn
 }
 
+resource "aws_lambda_function" "pwgen_hello" {
+  function_name = "pwgen-test-hello"
+  s3_bucket     = aws_s3_bucket.s3_pwgen.id
+  s3_key        = aws_s3_bucket_object.pwgen.key
+  runtime       = "python3.8"
+  handler       = "app.hello_world"
+
+  source_code_hash = data.archive_file.lambda_pwgen.output_base64sha256
+
+  role = aws_iam_role.lambda_exec.arn
+}
+
 resource "aws_lambda_permission" "apiv2" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.pwgen_py.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.pwgen.execution_arn}/*/*"
+}
+
+resource "aws_lambda_permission" "apiv2_hello" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.pwgen_hello.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.pwgen.execution_arn}/*/*/status"
 }
