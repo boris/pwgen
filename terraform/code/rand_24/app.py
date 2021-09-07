@@ -2,8 +2,8 @@ from pwgen import pwgen
 import json
 
 def lambda_handler(event, context):
-    passwd = pwgen(event['length'],
-            symbols=True,
+    passwd = pwgen(42,
+            symbols=False,
             )
     return {
             'statusCode': 200,
