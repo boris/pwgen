@@ -31,7 +31,7 @@ resource "aws_apigatewayv2_integration" "pwgen" {
 
 resource "aws_apigatewayv2_route" "pwgen" {
   api_id    = aws_apigatewayv2_api.pwgen.id
-  route_key = "GET /pass"
+  route_key = "GET /{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.pwgen.id}"
 }
 
