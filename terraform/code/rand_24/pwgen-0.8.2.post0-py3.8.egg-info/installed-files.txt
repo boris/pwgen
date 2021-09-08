@@ -1,0 +1,10 @@
+../../../bin/pwgen
+../pwgen/__init__.py
+../pwgen/__pycache__/__init__.cpython-38.pyc
+../pwgen/__pycache__/cmdline.cpython-38.pyc
+../pwgen/cmdline.py
+PKG-INFO
+SOURCES.txt
+dependency_links.txt
+entry_points.txt
+top_level.txt

@@ -1,0 +1,9 @@
+setup.cfg
+setup.py
+pwgen/__init__.py
+pwgen/cmdline.py
+pwgen.egg-info/PKG-INFO
+pwgen.egg-info/SOURCES.txt
+pwgen.egg-info/dependency_links.txt
+pwgen.egg-info/entry_points.txt
+pwgen.egg-info/top_level.txt
