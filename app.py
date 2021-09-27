@@ -1,3 +1,4 @@
+import os
 from pwgen import pwgen
 from flask import Flask
 from flask import render_template
@@ -9,7 +10,7 @@ import beeline
 from beeline.middleware.flask import HoneyMiddleware
 
 beeline.init(
-        writekey='iAPI_KEY',
+        writekey=os.environ['HONEYCOMB_API'],
         dataset='poc-pwgen',
         service_name='pwgen',
         )
