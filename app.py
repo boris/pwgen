@@ -10,7 +10,7 @@ import beeline
 from beeline.middleware.flask import HoneyMiddleware
 
 beeline.init(
-        writekey=os.environ['HONEYCOMB_API'],
+        writekey=os.getenv('HONEYCOMB_API', None),
         dataset='poc-pwgen',
         service_name='pwgen',
         )
