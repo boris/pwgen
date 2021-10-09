@@ -10,7 +10,7 @@ import beeline
 from beeline.middleware.flask import HoneyMiddleware
 
 beeline.init(
-        writekey=os.environ['HONEYCOMB_API'],
+        writekey=os.getenv('HONEYCOMB_API', None),
         dataset='poc-pwgen',
         service_name='pwgen',
         )
@@ -27,6 +27,8 @@ str_multi_count = Counter('str_multi', 'Requests of string-only multi passwd')
 
 short_hash = str(subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']),'utf-8').strip()
 
+valid_chars="!@#$%^&*()_-=+,.<>/?;:{}[]|"
+
 HoneyMiddleware(app, db_events=False)
 
 @app.route('/')
@@ -42,7 +44,7 @@ def healthz():
 @app.route('/<int:length>')
 def default_usage(length):
     with beeline.tracer("single int"):
-        passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
+        passwd = pwgen(length, symbols=True, allowed_symbols=valid_chars) + "\n"
         single_count.inc()
         return Response(passwd, mimetype="text/plain")
 
@@ -66,11 +68,11 @@ def generate_string(length, count):
 @app.route('/<int:length>/<int:count>')
 def generate_random(length, count):
     if count == 1:
-        passwd = pwgen(length, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|") + "\n"
+        passwd = pwgen(length, symbols=True, allowed_symbols=valid_chars) + "\n"
         single_count.inc()
         return Response(passwd, mimetype="text/plain")
     else:
-        passwd = "\n".join(pwgen(length, count, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|")) + "\n"
+        passwd = "\n".join(pwgen(length, count, symbols=True, allowed_symbols=valid_chars)) + "\n"
         multi_count.inc()
         return Response(passwd, mimetype="text/plain")
 
