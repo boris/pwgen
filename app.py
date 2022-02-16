@@ -6,6 +6,7 @@ from flask import Response
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from prometheus_client import make_wsgi_app, Counter, Gauge
 import subprocess
+import docker
 import beeline
 from beeline.middleware.flask import HoneyMiddleware
 
@@ -75,6 +76,13 @@ def generate_random(length, count):
         passwd = "\n".join(pwgen(length, count, symbols=True, allowed_symbols=valid_chars)) + "\n"
         multi_count.inc()
         return Response(passwd, mimetype="text/plain")
+
+@app.route('/docker')
+def docker_name():
+    left = docker.left()
+    right = docker.right()
+    name = "{} {}".format(left, right)
+    return Response(name, mimetype="text/plain")
 
 @app.route('/donate')
 def sutmm():
