@@ -5,6 +5,7 @@ from flask import Response
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from prometheus_client import make_wsgi_app, Counter, Gauge
 import subprocess
+import docker
 
 app = Flask(__name__)
 app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
@@ -59,6 +60,13 @@ def generate_random(length, count):
         passwd = "\n".join(pwgen(length, count, symbols=True, allowed_symbols="!@#$%^&*()_-=+,.<>/?;:{}[]\|")) + "\n"
         multi_count.inc()
         return Response(passwd, mimetype="text/plain")
+
+@app.route('/docker')
+def docker_name():
+    left = docker.left()
+    right = docker.right()
+    name = "{} {}".format(left, right)
+    return Response(name, mimetype="text/plain")
 
 @app.route('/donate')
 def sutmm():
