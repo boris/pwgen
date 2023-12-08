@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -20,11 +20,11 @@ spec:
     metadata:
       labels:
         app: pwgen
-        version: "1.7"
+        version: "1.7.0"
         type: web
     spec:
       containers:
-      - image: boris/pwgen-web:1.7
+      - image: boris/pwgen-web:1.7.0
         imagePullPolicy: IfNotPresent
         name: pwgen
         resources: {}
@@ -32,3 +32,15 @@ spec:
         - containerPort: 5000
       dnsPolicy: ClusterFirst
       restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pwgen
+spec:
+  type: NodePort
+  selector:
+    app: pwgen
+  ports:
+    - protocol: TCP
+      port: 5000
