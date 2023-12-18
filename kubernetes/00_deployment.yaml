@@ -32,15 +32,3 @@ spec:
         - containerPort: 5000
       dnsPolicy: ClusterFirst
       restartPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pwgen
-spec:
-  type: NodePort
-  selector:
-    app: pwgen
-  ports:
-    - protocol: TCP
-      port: 5000
