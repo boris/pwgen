@@ -1,26 +1,32 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: pwgen-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
-spec:
-  rules:
-    - host: pwgen.xyz
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: pwgen
-                port:
-                  number: 5000
-          - path: /.*
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: pwgen
-                port:
-                  number: 5000
-
+# Note:
+#   This is not needed at the moment, as the service will be exposed to the
+#   internet using cloudflare tunnels.
+#
+#   This code is kept just for future reference
+#
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: pwgen-ingress
+#  annotations:
+#    nginx.ingress.kubernetes.io/use-regex: "true"
+#spec:
+#  rules:
+#    - host: pwgen.xyz
+#      http:
+#        paths:
+#          - path: /
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: pwgen
+#                port:
+#                  number: 5000
+#          - path: /.*
+#            pathType: ImplementationSpecific
+#            backend:
+#              service:
+#                name: pwgen
+#                port:
+#                  number: 5000
+#
