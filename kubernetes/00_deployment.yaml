@@ -30,5 +30,19 @@ spec:
         resources: {}
         ports:
         - containerPort: 5000
+      - image: cloudflare/cloudflared
+        imagePullPolicy: IfNotPresent
+        name: cf-tunnel
+        env:
+          - name: CF_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: cf-tunnel-token-pwgen
+                key: token
+        args:
+          - tunnel
+          - run
+          - --token
+          - $(CF_TOKEN)
       dnsPolicy: ClusterFirst
       restartPolicy: Always
