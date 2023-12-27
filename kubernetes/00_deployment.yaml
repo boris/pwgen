@@ -24,7 +24,7 @@ spec:
         type: web
     spec:
       containers:
-      - image: boris/pwgen-web:1.7.0
+      - image: boris/pwgen-web
         imagePullPolicy: IfNotPresent
         name: pwgen
         resources: {}
