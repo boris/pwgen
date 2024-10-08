@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: pwgen
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: pwgen
   ports:
